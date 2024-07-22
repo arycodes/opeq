@@ -27,8 +27,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
+  if (req.session.loggedin && req.session.useremail) {
+    return res.redirect('/dashboard');
+  }
+
   res.render('index', { error: "" });
 });
+
+
+
 app.get('/signup', (req, res) => {
   res.render('signup', { error: "" });
 });
@@ -118,16 +125,68 @@ app.get('/login', (req, res) => {
 });
 
 
+app.post("/login/", async (req, res) => {
+  const email = req.body["login-email"];
+  const password = req.body["login-password"];
+
+
+  req.session.loginemail = email
+
+  if (!email) {
+    return res.render('login', { error: "Please provide the email" });
+  }
+
+  try {
+    const emailExists = await checkEmailExists(email);
+
+    if (!emailExists) {
+      return res.render('login', { error: "The email is not in use with us" });
+    }
+
+    if (!password) {
+      return res.render('login', { error: "Please provide the password" });
+    }
+
+    const authentic = await accessUser(email, password);
+
+    if (authentic) {
+      req.session.loggedin = true
+      req.session.useremail = req.session.loginemail
+
+
+      return res.redirect('/dashboard');
+    } else {
+      return res.render('login', { error: "Invalid password" });
+    }
+
+  } catch (error) {
+    console.error(error);
+    return res.render('login', { error: "An error occurred. Please try again later." });
+  }
+});
+
+
 
 app.get("/dashboard/", (req, res) => {
   if (req.session.loggedin) {
-    res.send("dashboard of " + req.session.useremail)
+    return res.render("dashboard", { email: req.session.useremail })
   }
 
   else {
     res.redirect("/")
   }
 })
+
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      return res.redirect('/dashboard');
+    }
+    res.redirect('/');
+  });
+});
+
 
 
 
