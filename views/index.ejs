@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPEQ - Chat App</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f9;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+
+        }
+
+        header {
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            text-align: center;
+            background-color: #ffffff;
+            
+            color: #333;
+            padding: 50px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .hero-section h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background 0.3s, transform 0.3s;
+            margin: 10px;
+        }
+
+        .login {
+            background-color: #ffffff;
+            color: #6c63ff;
+            border: 2px solid #6c63ff;
+        }
+
+        .signup {
+            background: #6c63ff;
+            color: white;
+            border: 2px solid #6c63ff;
+        }
+
+        .signup:hover{
+            background-color: #4b42cf;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-section p {
+                font-size: 1.2em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 2em;
+            }
+
+            .hero-section p {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="hero-section">
+            <h1>Welcome to OPEQ</h1>
+            <p>Your seamless communication platform. Connect, chat, and collaborate with ease.</p>
+            <div class="button-group">
+                <a href="/login" class="btn login">Login</a>
+                <a href="/signup" class="btn signup">Sign Up</a>
+            </div>
+        </div>
+    </header>
+</body>
+
+</html>

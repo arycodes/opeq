@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100svh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .container form{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .heading {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
+            padding: 10px;
+            overflow-wrap: break-word;
+
+
+
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: .5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: .5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: .75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p class="heading">An OTP is sent to <strong><%=email%></strong>
+        </p>
+        <form action="/verify-otp" method="POST">
+            <div class="form-group">
+                <input type="number" id="otp" name="otp" placeholder="Enter OTP" required>
+            </div>
+            <button type="submit">Verify</button>
+
+            <span id="errormsg"><%=error%></span>
+        </form>
+    </div>
+</body>
+
+</html>

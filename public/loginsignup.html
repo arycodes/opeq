@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Signup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100svh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+            text-align: left;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-container form p {
+            margin: 10px 0;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container .btn {
+            display: inline-block;
+            background: #6c63ff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .form-container .btn:hover {
+            background: #4b42cf;
+        }
+
+        .toggle-btn {
+            color: #6c63ff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function toggleForm() {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'flex';
+                signupForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'flex';
+            }
+        }
+
+        
+    </script>
+</head>
+
+<body>
+    <div class="form-container">
+        <form id="login-form" action="#" method="POST">
+            <h2>Login</h2>
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" name="login-email" placeholder="Enter your email" required>
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="login-password" placeholder="Enter your password" required>
+            <button type="submit" class="btn">Login</button>
+            <p>Don't have an account? <span class="toggle-btn" onclick="toggleForm()">Sign up</span></p>
+        </form>
+        <form id="signup-form" action="#" method="POST" style="display: none;">
+            <h2>Sign Up</h2>
+            <label for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" name="signup-email" placeholder="Enter your email" required>
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="signup-password" placeholder="Create a password" required>
+            <label for="signup-confirm-password">Confirm Password</label>
+            <input type="password" id="signup-confirm-password" name="signup-confirm-password"
+                placeholder="Confirm your password" required>
+            <button type="submit" class="btn">Sign Up</button>
+            <p>Already have an account? <span class="toggle-btn" onclick="toggleForm()">Login</span></p>
+        </form>
+
+        <span id="errormsg"></span>
+    </div>
+</body>
+
+</html>
