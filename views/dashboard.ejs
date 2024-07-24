@@ -4,70 +4,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>OPEQ Chat</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
+
 
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            height: 100dvh;
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        }
-
-        .container {
-            text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: fit-content;
 
         }
 
-        h1 {
+        .header {
+            display: flex;
+            height: 60px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+            position: sticky;
+            top: 0;
+
+
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
             color: #333;
-            margin-bottom: 20px;
         }
 
-        p {
-            color: #666;
-            margin-bottom: 20px;
+        nav {
+            display: flex;
+            gap: 1rem;
         }
 
-        .btn-logout {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
+        nav a {
             text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            color: #007bff;
+            font-size: 20px;
         }
 
-        .btn-logout:hover {
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hamburger {
+            height: 50%;
+            width: 30px;
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            justify-content: space-between;
+            transition: 0.2s ease-in;
+
+        }
+
+        .hamburger span {
+            display: flex;
+            width: 100%;
+            height: 4px;
+            background-color: #222;
+            border-radius: 5px;
+            transition: 0.2s ease-in;
+
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: flex;
+                position: fixed;
+                top: 0;
+                height: 100%;
+                width: 90%;
+                max-width: 300px;
+                flex-direction: column;
+                background-color: #fff;
+                padding: 40px;
+                padding-top: 200px;
+                overflow: auto;
+                right: -100%;
+                transition: 0.4s ease-in-out;
+            }
+
+
+            nav.active {
+                right: 0;
+
+            }
+
+            nav {
+                font-size: 24px;
+                font-weight: normal;
+                box-shadow: 0 0 20px 3px #999;
+            }
+
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active {
+                z-index: 95;
+
+                position: relative;
+            }
+
+            .hamburger.active span {
+                position: absolute;
+
+            }
+
+            .hamburger.active span:nth-child(1) {
+                rotate: 45deg;
+            }
+
+            .hamburger.active span:nth-child(2) {
+                rotate: -45deg;
+            }
+        }
+
+        .herosection {
+            text-align: center;
+            background: transparent;
+            padding: 50px 20px;
+            border-radius: 10px;
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+            /* max-width: 600px; */
+            /* margin: 10px auto; */
+            height: 100% - 60px;
+        }
+
+        .herosection h1 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #333;
+            overflow-wrap: br;
+            word-wrap: break-word;
+        }
+
+        .herosection h2 {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            color: #666;
+        }
+
+        .container-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container-main form {
+            margin-bottom: 20px;
+            display: flex;
+
+        }
+
+        .container-main input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .container-main button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .container-main button:hover {
             background-color: #0056b3;
+        }
+
+        .container-main span {
+            margin: 20px 0;
+            color: #666;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Welcome, <%= email %>!</h1>
-        <p>This is a simple Dashboard page for testing.</p>
-        <a href="/logout" class="btn-logout">Logout</a>
+    <header class="header">
+        <div class="logo">
+            <h1>OPEQ Chat</h1>
+        </div>
+
+        <nav id="navbar">
+            <a href="#profile">Profile</a>
+            <a href="#settings">Settings</a>
+            <a href="#logout">Logout</a>
+        </nav>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+
+    <div class="herosection">
+        <h1>Welcome <%=email%> to OPEQ Chat</h1>
+        <h2>Join groups with your friends and start chatting</h2>
+
+        <div class="container-main">
+            <form action="">
+                <input type="text" name="chat-id" id="chat-id" placeholder="Enter your chat ID">
+                <button type="submit">Join</button>
+            </form>
+            <span>or</span>
+            <form action="">
+                <button type="submit">Create New Room</button>
+            </form>
+        </div>
     </div>
 </body>
+
+
+<script>
+    document.getElementById("hamburger").addEventListener("click", () => {
+        document.getElementById("navbar").classList.toggle("active")
+        document.getElementById("hamburger").classList.toggle("active")
+    })
+
+</script>
 
 </html>
